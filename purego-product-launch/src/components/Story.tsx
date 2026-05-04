@@ -2,29 +2,48 @@ import { motion } from 'framer-motion';
 
 const Story = () => {
   return (
-    <section className="py-28 md:py-36 section-gradient">
-      <div className="container max-w-5xl mx-auto px-6">
+    <section
+      id="story"
+      className="py-28 md:py-40 section-gradient flex items-center justify-center overflow-hidden"
+    >
+      <div className="container px-6">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          className="text-center space-y-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center space-y-14 max-w-3xl mx-auto"
         >
-          <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground font-light">Our Story</p>
-          <div className="brand-divider" />
-          
-          <h2 className="font-display text-3xl md:text-5xl font-medium leading-snug tracking-tight max-w-3xl mx-auto">
-            One million plastic bottles are purchased every&nbsp;minute.
-            <br className="hidden md:block" />
-            We decided that was enough.
-          </h2>
-          
-          <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
-            PURE GO was born from a simple belief: clean water shouldn't cost the planet. 
-            Our transparent filtration technology lets you see purity happening — no electricity, 
-            no waste, just water the way it should be.
-          </p>
+          {/* Heading */}
+          <div className="space-y-5">
+            <p className="text-xs tracking-[0.45em] uppercase text-primary font-semibold">
+              Our Philosophy
+            </p>
+
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-foreground">
+              Pure water. <span className="text-primary">Clear mind.</span>
+            </h2>
+          </div>
+
+          {/* Content */}
+          <div className="space-y-6 text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
+            
+            <p className="text-foreground font-normal text-xl md:text-2xl">
+              We believe hydration should be simple,<br />
+              honest, and effortless.
+            </p>
+
+            <p>
+              No noise. No overpromises.<br />
+              Just clean water, wherever life takes you.
+            </p>
+
+            <p className="pt-6 text-primary font-medium text-lg tracking-wide">
+              Because when something is essential,<br />
+              it should feel natural.
+            </p>
+
+          </div>
         </motion.div>
       </div>
     </section>

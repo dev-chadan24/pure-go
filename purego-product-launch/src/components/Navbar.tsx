@@ -28,12 +28,21 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${scrolled ? 'backdrop-blur-2xl bg-background/80 shadow-[0_1px_0_0_hsl(var(--border)/0.3)]' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${scrolled ? 'backdrop-blur-xl bg-white/70 dark:bg-black/40 shadow-sm border-b border-border/10' : 'bg-transparent py-2'}`}>
       <div className="container max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src={logoImg} alt="PURE GO" className="h-10 dark:invert" />
-        </Link>
+       
+{/* Logo */}
+<Link 
+  to="/" 
+  className="flex items-center transition-all duration-300 hover:opacity-80"
+>
+  <img 
+    src={logoImg} 
+    alt="PURE GO" 
+    className="h-[38px] w-auto object-contain" 
+  />
+</Link>
+
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-10">

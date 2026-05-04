@@ -63,7 +63,13 @@ const Checkout = () => {
           contact: formData.phone
         },
         theme: {
-          color: '#1a1a1a'
+          color: '#0B0B0C'
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+            navigate('/failure');
+          }
         }
       };
 
@@ -248,7 +254,7 @@ const Checkout = () => {
               <Button 
                 type="submit" 
                 form="checkout-form"
-                className="glow-button w-full h-14 rounded-full text-sm tracking-[0.1em] uppercase mt-4" 
+                className="glow-button w-full h-14 font-medium text-sm tracking-[0.1em] uppercase mt-4 transition-all duration-300" 
                 disabled={isProcessing}
               >
                 {isProcessing ? 'Processing...' : `Pay ${formatINR(finalTotal)}`}
@@ -256,13 +262,13 @@ const Checkout = () => {
 
               {/* Trust Badges */}
               <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/40 mt-6">
-                <div className="flex flex-col items-center justify-center text-center gap-2">
-                  <Truck size={18} className="text-muted-foreground/60" />
-                  <p className="text-[11px] text-muted-foreground font-light uppercase tracking-wider">Free Delivery<br/>3-5 Days</p>
+                <div className="flex flex-col items-center justify-center text-center gap-2.5">
+                  <Truck size={18} className="text-foreground/60" />
+                  <p className="text-[11px] text-muted-foreground font-medium uppercase tracking-widest">Free Delivery<br/><span className="text-foreground/60">3-5 Days</span></p>
                 </div>
-                <div className="flex flex-col items-center justify-center text-center gap-2">
-                  <ShieldCheck size={18} className="text-muted-foreground/60" />
-                  <p className="text-[11px] text-muted-foreground font-light uppercase tracking-wider">Trusted by<br/>1,000+ Users</p>
+                <div className="flex flex-col items-center justify-center text-center gap-2.5">
+                  <ShieldCheck size={18} className="text-foreground/60" />
+                  <p className="text-[11px] text-muted-foreground font-medium uppercase tracking-widest">Secure Payment<br/><span className="text-foreground/60">1,000+ Users</span></p>
                 </div>
               </div>
 

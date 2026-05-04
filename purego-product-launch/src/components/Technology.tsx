@@ -1,4 +1,4 @@
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { motion } from 'framer-motion';
 import techImg from '@/assets/purego-tech.png';
 
 const layers = [
@@ -8,12 +8,16 @@ const layers = [
 ];
 
 const Technology = () => {
-  const { ref, isVisible } = useScrollAnimation();
-
   return (
-    <section id="technology" className="py-28 relative">
+    <section id="technology" className="py-28 relative overflow-hidden">
       <div className="absolute inset-0 hero-gradient opacity-50" />
-      <div ref={ref} className={`container max-w-7xl mx-auto px-6 relative z-10 transition-all duration-[1.2s] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="container max-w-7xl mx-auto px-6 relative z-10"
+      >
         <div className="text-center mb-20 space-y-5">
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
             Three Layers. <span className="glow-text">Zero Compromise.</span>
@@ -24,7 +28,13 @@ const Technology = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="flex justify-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center"
+          >
             <img
               src={techImg}
               alt="PUREGO filtration technology layers"
@@ -33,12 +43,16 @@ const Technology = () => {
               height={768}
               className="w-full max-w-md"
             />
-          </div>
+          </motion.div>
 
           <div className="space-y-6">
             {layers.map((layer, i) => (
-              <div
+              <motion.div
                 key={layer.name}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="feature-card cursor-default"
               >
                 <div className="flex items-start gap-5">
@@ -50,11 +64,11 @@ const Technology = () => {
                     <p className="text-muted-foreground text-sm leading-relaxed font-light">{layer.desc}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
