@@ -1,9 +1,17 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 import { toast } from 'sonner';
 import bottle1lBlack from '@/assets/purego-1l-black.png';
 import { formatINR } from '@/lib/utils';
+
+const perks = [
+  'Premium PURE GO Bottle (1L)',
+  'Advanced Carbon Filter included',
+  'Sustainably sourced materials',
+  'Lifetime brand warranty',
+  'Free priority shipping',
+];
 
 const Pricing = () => {
   const addItem = useCartStore((s) => s.addItem);
@@ -14,58 +22,81 @@ const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-28 md:py-36 section-gradient">
-      <div className="container max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-center mb-16 space-y-4"
-        >
-          <p className="text-xs tracking-[0.3em] uppercase text-primary font-medium">Investment</p>
-          <div className="brand-divider" />
-          <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight mt-6">
-            Pure hydration.<br />Zero compromise.
-          </h2>
-        </motion.div>
+    <section id="pricing" className="py-32 md:py-44 section-gradient relative overflow-hidden">
+      {/* Ambient glow */}
+      <div
+        className="ambient-glow w-[700px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse, hsl(var(--gold)/0.07) 0%, transparent 60%)' }}
+      />
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+      <div className="container max-w-5xl mx-auto px-6 relative z-10">
+        {/* ── Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-md mx-auto text-center space-y-10 bg-card/30 backdrop-blur-sm p-12 rounded-[2rem] border border-white/5"
+          className="text-center mb-20 space-y-5"
         >
-          <div className="font-display text-6xl md:text-7xl font-medium tracking-tight">
-            {formatINR(999)}
-          </div>
+          <p className="editorial-label">Investment</p>
+          <div className="brand-divider" />
+          <h2 className="font-display text-5xl md:text-6xl font-medium tracking-tight mt-8 leading-[0.95]">
+            Pure hydration.<br />
+            <span className="italic cinematic-text">Zero compromise.</span>
+          </h2>
+        </motion.div>
 
-          <div className="space-y-4 text-left max-w-xs mx-auto">
-            {[
-              'Premium PURE GO Bottle',
-              'Advanced Carbon Filter included',
-              'Sustainably sourced materials',
-              'Lifetime brand warranty',
-              'Free priority shipping'
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground font-light">
-                <Check size={14} className="text-primary shrink-0" />
-                {item}
+        {/* ── Pricing Card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-md mx-auto"
+        >
+          <div className="gold-glass rounded-[2rem] p-12 text-center space-y-10 relative overflow-hidden">
+            {/* Best value badge */}
+            <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-medium tracking-[0.2em] uppercase bg-gold/12 text-gold border border-gold/20">
+              <Sparkles size={9} />
+              Most Popular
+            </div>
+
+            {/* Price */}
+            <div>
+              <div className="font-display text-[clamp(4rem,10vw,6rem)] font-medium tracking-tight gold-text leading-none mb-2">
+                {formatINR(999)}
               </div>
-            ))}
+              <p className="editorial-label text-[10px] text-muted-foreground">One-time purchase</p>
+            </div>
+
+            {/* Gold divider */}
+            <div className="gold-line w-full opacity-40" />
+
+            {/* Perks */}
+            <div className="space-y-4 text-left">
+              {perks.map((item) => (
+                <div key={item} className="flex items-center gap-3 text-sm text-muted-foreground font-light">
+                  <div className="w-5 h-5 rounded-full bg-gold/15 border border-gold/25 flex items-center justify-center flex-shrink-0">
+                    <Check size={10} className="text-gold" strokeWidth={2.5} />
+                  </div>
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <button
+              onClick={handleOrder}
+              className="luxury-button w-full py-5 font-medium text-[11px] tracking-[0.25em] uppercase"
+            >
+              Add to Cart
+            </button>
+
+            {/* Footnote */}
+            <p className="text-[10px] text-muted-foreground/50 font-light uppercase tracking-widest">
+              Replacement filters available for {formatINR(399)}
+            </p>
           </div>
-
-          <button 
-            onClick={handleOrder}
-            className="glow-button w-full py-5 rounded-full font-bold text-xs tracking-[0.2em] uppercase"
-          >
-            Add to Cart
-          </button>
-
-          <p className="text-[10px] text-muted-foreground/50 font-light uppercase tracking-widest">
-            Replacement filters available for {formatINR(399)}
-          </p>
         </motion.div>
       </div>
     </section>

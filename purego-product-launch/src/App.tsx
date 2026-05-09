@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/features/auth/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -30,8 +31,9 @@ const App = () => (
               <Toaster />
               <Sonner />
               <BrowserRouter>
-                <Routes>
-                <Route path="/" element={<Index />} />
+                <SmoothScroll>
+                  <Routes>
+                  <Route path="/" element={<Index />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 
@@ -69,11 +71,11 @@ const App = () => (
                   } 
                 />
 
-                {/* Catch-all */}
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
+                </Routes>
+                </SmoothScroll>
+              </BrowserRouter>
+            </TooltipProvider>
         </AuthProvider>
         </ThemeProvider>
       </QueryClientProvider>
